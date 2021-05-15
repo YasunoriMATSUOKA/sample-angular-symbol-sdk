@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as SymbolSDK from 'symbol-sdk';
 
 @Component({
   selector: 'app-account-info',
@@ -6,11 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account-info.component.css'],
 })
 export class AccountInfoComponent implements OnInit {
+  // This privateKey is dummy privateKey
   privateKey: string =
     '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
-  network: number = 152;
-  plainAddress: string = 'TAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
-  prettyAddress: string = 'TAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAA';
+  network: SymbolSDK.NetworkType = SymbolSDK.NetworkType.TEST_NET;
+  account: SymbolSDK.Account = SymbolSDK.Account.createFromPrivateKey(
+    this.privateKey,
+    this.network
+  );
+  plainAddress: string = this.account.address.plain();
+  prettyAddress: string = this.account.address.pretty();
 
   constructor() {}
 
