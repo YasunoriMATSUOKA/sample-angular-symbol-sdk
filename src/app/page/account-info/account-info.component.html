@@ -1,0 +1,7 @@
+<p>account-info works!</p>
+<p>Address: {{ rawAddress }}</p>
+<p>Network: {{ network }}</p>
+<ng-container *ngIf="accountInfo$ | async as accountInfo">
+  <p>Importance: {{ accountInfo.importance.toString() }}</p>
+  <p>Balance[MicroXYM]: {{ accountInfo.mosaics[0].amount.toString() }}</p>
+</ng-container>
